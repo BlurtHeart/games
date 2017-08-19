@@ -98,7 +98,7 @@ class MainWindow(wx.Frame):
 
 class App(wx.App):
 	def OnInit(self):
-		self.frame = MainWindow(None, 'Small editor')
+		self.frame = MainWindow(None, 'Calculator')
 		self.frame.Centre()
 		return True
 

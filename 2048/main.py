@@ -55,7 +55,12 @@ class MainWindow(wx.Frame):
     def loadScore(self):
         if os.path.exists("bestscore.ini"):
             with open("bestscore.ini", 'r') as fp:
-                self.bstScore = fp.read()
+                try:
+                    self.bstScore = int(fp.read())
+                except ValueError:
+                    self.bstScore = 0
+                except TypeError:
+                    self.bstScore = 0
 
     def saveScore(self):
         with open('bestscore.ini', 'w') as fp:
@@ -179,6 +184,7 @@ class MainWindow(wx.Frame):
             self.putTile()
             self.drawChange(score)
             if self.isGameOver():
+                self.saveScore()
                 if wx.MessageBox(u'游戏结束，是否再来？', u'哈哈', wx.YES_NO | wx.ICON_INFORMATION) == wx.YES:
                     self.initGame()
                     self.drawAll()
